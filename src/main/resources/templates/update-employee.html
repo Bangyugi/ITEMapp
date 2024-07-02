@@ -1,0 +1,438 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Group2-IT Employee management system webapp</title>
+
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/plugins/select2/css/select2.min.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/fontawesome/css/all.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <div class="header">
+
+        <div class="header-left">
+            <a th:href="@{/home}" class="logo">
+                <img
+                        src="https://group2.com/wp-content/uploads/2022/11/Group-2-Logo-Tagline.png"
+                        alt="Logo">
+            </a>
+            <a th:href="@{/home}" class="logo logo-small">
+                <img
+                        src="https://upload.wikimedia.org/wikipedia/en/thumb/3/38/G2_Crowd_logo.svg/1200px-G2_Crowd_logo.svg.png"
+                        alt="Logo" width="30" height="30">
+            </a>
+            <a href="javascript:void(0);" id="toggle_btn">
+						<span class="bar-icon">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+            </a>
+        </div>
+
+        <div class="top-nav-search">
+            <form>
+                <input type="text" class="form-control" placeholder>
+                <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+
+        <a class="mobile_btn" id="mobile_btn">
+            <i class="fas fa-bars"></i>
+        </a>
+
+        <ul class="nav user-menu">
+
+            <li class="nav-item dropdown">
+
+                <div class="dropdown-menu notifications">
+                    <div class="topnav-dropdown-header">
+                        <span class="notification-title">Notifications</span>
+                        <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+                    </div>
+                    <div class="noti-content">
+                        <ul class="notification-list">
+                            <li class="notification-message">
+                                <a href="activities.html">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt
+                                                         th:src="@{/img/profiles/avatar-02.jpg}">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Brian
+															Johnson</span> paid the invoice <span
+                                                    class="noti-title">#DF65485</span></p>
+                                            <p class="noti-time"><span class="notification-time">4 mins
+															ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="activities.html">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt
+                                                         th:src="@{/img/profiles/avatar-03.jpg}">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Marie
+															Canales</span> has accepted your estimate <span
+                                                    class="noti-title">#GTR458789</span></p>
+                                            <p class="noti-time"><span class="notification-time">6 mins
+															ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="activities.html">
+                                    <div class="media">
+                                        <div class="avatar avatar-sm">
+													<span class="avatar-title rounded-circle bg-primary-light"><i
+                                                            class="far fa-user"></i></span>
+                                        </div>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">New user
+															registered</span></p>
+                                            <p class="noti-time"><span class="notification-time">8 mins
+															ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="activities.html">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt
+                                                         th:src="@{/img/profiles/avatar-04.jpg}">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Barbara
+															Moore</span> declined the invoice <span
+                                                    class="noti-title">#RDW026896</span></p>
+                                            <p class="noti-time"><span class="notification-time">12 mins
+															ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="activities.html">
+                                    <div class="media">
+                                        <div class="avatar avatar-sm">
+													<span class="avatar-title rounded-circle bg-info-light"><i
+                                                            class="far fa-comment"></i></span>
+                                        </div>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">You have received
+															a new message</span></p>
+                                            <p class="noti-time"><span class="notification-time">2 days
+															ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="topnav-dropdown-footer">
+                        <a href="activities.html">View all Notifications</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown has-arrow main-drop">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+							<span class="user-img">
+								<img th:src="@{/img/profile.jpg}" alt>
+								<span class="status online"></span>
+							</span>
+                    <span th:text="${user.username}"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/profile}"><i data-feather="user"
+                                                                      class="mr-1"></i> Profile</a>
+                    <a class="dropdown-item" th:href="@{/settings}"><i
+                            data-feather="settings"
+                            class="mr-1"></i> Settings</a>
+                    <form action="#" th:action="@{/logout}" method="POST">
+                        <button class="dropdown-item" style="background: none; border: 0">
+                            <i data-feather="log-out" class="mr-1"></i>
+                            <a>Logout</a>
+                        </button>
+                    </form>
+                </div>
+            </li>
+
+        </ul>
+        <div class="dropdown mobile-user-menu show">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+               aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right ">
+                <a class="dropdown-item" th:href="@{/profile}">My Profile</a>
+                <a class="dropdown-item" th:href="@{/settings}">Settings</a>
+                <form action="#" th:ation="@{/logout}" method="POST"
+                      class="dropdown-item">
+                    <a><input type="submit" value="Logout"></a>
+                </form>
+            </div>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div class="sidebar-contents">
+                    <div id="sidebar-menu" class="sidebar-menu">
+                        <div class="mobile-show">
+                            <div class="offcanvas-menu">
+                                <div class="user-info align-center bg-theme text-center">
+											<span class="lnr lnr-cross  text-white"
+                                                  id="mobile_btn_close">X</span>
+                                    <a href="javascript:void(0)" class="d-block menu-style text-white">
+                                        <div class="user-avatar d-inline-block mr-3">
+                                            <img th:src="@{/img/profiles/avatar-18.jpg}" alt="user avatar"
+                                                 class="rounded-circle" width="50">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sidebar-input">
+                                <div class="top-nav-search">
+                                    <form>
+                                        <input type="text" class="form-control" placeholder="Search here">
+                                        <button class="btn" type="submit"><i
+                                                class="fas fa-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>
+                                <a th:href="@{/home}"><img th:src="@{/img/home.svg}"
+                                                           alt="sidebar_img">
+                                    <span>Dashboard</span></a>
+                            </li>
+                            <li class="active">
+                                <a th:href="@{/employee}"><img th:src="@{/img/employee.svg}"
+                                                               alt="sidebar_img"><span> Employees</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/company}"><img th:src="@{/img/company.svg}"
+                                                              alt="sidebar_img"> <span> Company</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/leave}"><img th:src="@{/img/leave.svg}"
+                                                            alt="sidebar_img">
+                                    <span>Leave</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/manage}"><img th:src="@{/img/manage.svg}"
+                                                             alt="sidebar_img"> <span>Manage</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/settings}"><img th:src="@{/img/settings.svg}"
+                                                               alt="sidebar_img"><span>Settings</span></a>
+                            </li>
+                        </ul>
+                        <form action="#" th:action="@{/logout}" method="POST">
+                            <ul class="logout">
+                                <li>
+                                    <button style="background: none; border: none; width: 100%">
+                                        <a style="padding: 15px"><img th:src="@{/img/logout.svg}"
+                                                                      alt="sidebar_img"><span style="margin-left: 5px;">Log
+														out</span></a>
+
+                                    </button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12 col-12 ">
+                    <div class="breadcrumb-path mb-4">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active"> Employees</li>
+                        </ul>
+                        <h3>Create Employees</h3>
+                    </div>
+                </div>
+                <form class="col-xl-12 col-sm-12 col-12 " action="#"
+                      th:action="@{/update-employee}" method="POST" th:object="${employee}">
+                         <div class="row" style="display: none;">
+                          <div class="col-xl-6 col-sm-12 col-12 ">
+                           <div class="form-group">
+                            <input type="number" placeholder="Salary" th:field="*{id}">
+                           </div>
+                          </div>
+                         </div>
+                    <div class="col-xl-12 col-sm-12 col-12 ">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-titles">Basic Details <span>Organized and
+												secure.</span></h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="First Name"
+                                                   th:field="*{firstName}">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Last Name" th:field="*{lastName}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Email" th:field="*{email}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-sm-12 col-12 ">
+                        <div class="card ">
+                            <div class="card-header">
+                                <h2 class="card-titles">Employment Details<span>Let everyone know the
+												essentials so they're fully prepared.</span></h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <select class="select" th:field="*{workStyle}">
+                                                <option value="Permanent">Permanent </option>
+                                                <option value="Freelancer">Freelancer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+<!--                                    <div class="col-xl-6 col-sm-12 col-12 ">-->
+<!--                                        <div class="form-group">-->
+<!--                                            <input type="date"-->
+<!--                                                   th:field="*{startDate}">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Job Title" th:field="*{jobTitle}">
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col-xl-6 col-sm-12 col-12 ">-->
+<!--                                        <div class="form-group">-->
+<!--                                            <select class="select" th:field="*{workStyle}">-->
+<!--                                                <option value="Permanent">Permanent </option>-->
+<!--                                                <option value="Freelancer">Freelancer</option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="col-xl-12 col-sm-12 col-12 ">-->
+<!--                        <div class="card ">-->
+<!--                            <div class="card-header">-->
+<!--                                <h2 class="card-titles">Company Details<span>Let everyone know what-->
+<!--												company this employee working for.</span></h2>-->
+<!--                            </div>-->
+<!--                            <div class="card-body">-->
+<!--                                <div class="col-xl-12 col-sm-12 col-12">-->
+
+<!--                                    <div class="form-group">-->
+<!--                                        <div >-->
+<!--                                            <label >-->
+<!--                                                <input type="checkbox" th:field="*{companies}" th:value="'Ocean Tech'"/>-->
+<!--                                                <span>Ocean Tech</span>-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+
+
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-xl-12 col-sm-12 col-12 ">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-titles">Salary Details<span>Stored securely, only
+												visible to Super Admins, Payroll Admins, and themselves.</span></h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12 col-12 ">
+                                        <div class="form-group">
+                                            <input type="number" placeholder="Salary" th:field="*{salary}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-sm-12 col-12 ">
+                                <div class="form-btn">
+                                    <input type="submit" class="btn btn-apply w-auto" value="Submit">
+                                    <a href="#" class="btn btn-secondary"
+                                       style="width: auto; padding: 10px 20px;">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<script th:src="@{/js/feather.min.js}"></script>
+
+<script th:src="@{/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<script th:src="@{/plugins/select2/js/select2.min.js}"></script>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
