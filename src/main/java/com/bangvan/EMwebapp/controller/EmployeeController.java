@@ -18,6 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +42,7 @@ public class EmployeeController {
 
 
     @GetMapping("/employee")
-    public String employee(Model model, Authentication authentication) {
+    public String employee(Model model, Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("user", userDetails);
 
@@ -53,7 +59,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/add-employee")
-    public String addEmployee(Model model,Authentication authentication) {
+    public String addEmployee(Model model,Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("user", userDetails);
         model.addAttribute("employee", new CreateEmployeeRequest());
@@ -64,7 +70,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/add-employee")
-    public String createEmployee(Model model,@ModelAttribute("employee") CreateEmployeeRequest createEmployeeRequest,Authentication authentication) {
+    public String createEmployee(Model model,@ModelAttribute("employee") CreateEmployeeRequest createEmployeeRequest,Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         employeeService.createEmployee(createEmployeeRequest,userDetails.getUsername());
         System.out.println(createEmployeeRequest);
@@ -72,7 +78,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/update-employee")
-    public String updateEmployee(@RequestParam("employeeId") Long id, Model model, Authentication authentication) {
+    public String updateEmployee(@RequestParam("employeeId") Long id, Model model, Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("user",userDetails);
         EmployeeResponse employee = employeeService.findEmployeeById(id);
@@ -82,7 +88,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/update-employee")
-    public String updateEmployee(Model model, @ModelAttribute("employee") UpdateEmployeeRequest updateEmployeeRequest, Authentication authentication){
+    public String updateEmployee(Model model, @ModelAttribute("employee") UpdateEmployeeRequest updateEmployeeRequest, Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         System.out.println(updateEmployeeRequest);
         employeeService.updateEmployee(updateEmployeeRequest);
         return "redirect:/employee";

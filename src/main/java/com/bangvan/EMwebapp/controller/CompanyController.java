@@ -19,6 +19,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
 @Controller
 public class CompanyController {
 
@@ -31,7 +38,7 @@ public class CompanyController {
     private ModelMapper modelMapper;
 
     @GetMapping("/company")
-    public String company(Model model, Authentication authentication) {
+    public String company(Model model, Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("user",userDetails);
         model.addAttribute("companies",companyService.findAllByUser(userDetails.getUsername()));
@@ -41,7 +48,7 @@ public class CompanyController {
     }
 
     @PostMapping("/add-company")
-    public String addCompany(@ModelAttribute("createCompanyRequest") CreateCompanyRequest createCompanyRequest, Authentication authentication) {
+    public String addCompany(@ModelAttribute("createCompanyRequest") CreateCompanyRequest createCompanyRequest, Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         System.out.println(createCompanyRequest);
         companyService.createCompany(createCompanyRequest, userDetails.getUsername());

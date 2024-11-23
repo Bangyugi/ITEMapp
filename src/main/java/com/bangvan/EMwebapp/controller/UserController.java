@@ -28,6 +28,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -72,7 +77,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(Model model, @Valid @ModelAttribute("userRequest")  RegisterRequest userRequest, BindingResult bindingResult)
-            throws NoSuchAlgorithmException, MessagingException {
+            throws NoSuchAlgorithmException, MessagingException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         if (userService.usernameExist(userRequest.getUsername())) {
             System.out.println("Username already exists");
             bindingResult.addError(new FieldError("userRequest", "username", "Username already exists"));
@@ -104,7 +109,7 @@ public class UserController {
     }
 
     @PostMapping("/email-verify")
-    public String verifyOTP(@ModelAttribute("userRequest") RegisterRequest userRequest, BindingResult bindingResult, HttpSession httpSession) throws NoSuchAlgorithmException {
+    public String verifyOTP(@ModelAttribute("userRequest") RegisterRequest userRequest, BindingResult bindingResult, HttpSession httpSession) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         String sessionOTP = (String) httpSession.getAttribute("sessionOtp");
         if(userRequest.getOtp()!=null && sessionOTP!=null) {
             if(!userRequest.getOtp().equals(sessionOTP)){
@@ -123,7 +128,7 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String profile(Model model,Authentication authentication) {
+    public String profile(Model model,Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         UserResponse userResponse = userService.getUserByUsername(userDetails.getUsername());
         model.addAttribute("user", userResponse);
@@ -139,7 +144,7 @@ public class UserController {
     }
 
     @GetMapping("/profile-setting")
-    public String profileSetting(Model model,Authentication authentication) {
+    public String profileSetting(Model model,Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("user", userDetails);
         UserResponse userResponse = userService.getUserByUsername(userDetails.getUsername());
@@ -159,20 +164,20 @@ public class UserController {
     }
 
     @PostMapping("/profile-basic-update")
-    public String updateProfile(Model model,Authentication authentication, @ModelAttribute("basicInfo") UpdateBasicInfoRequest updateBasicInfoRequest ) {
-        userService.updateBasicUserInfo(updateBasicInfoRequest);
+    public String updateProfile(Model model,Authentication authentication, @ModelAttribute("basicInfo") UpdateBasicInfoRequest updateBasicInfoRequest ) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        userService.updateBasicUserInfo (updateBasicInfoRequest);
         return "redirect:/profile";
 
     }
 
     @PostMapping("/profile-contact-update")
-    public String updateContact(Model model,Authentication authentication, @ModelAttribute("contactInfo") UpdateContactInfoRequest updateContactInfoRequest ) {
+    public String updateContact(Model model,Authentication authentication, @ModelAttribute("contactInfo") UpdateContactInfoRequest updateContactInfoRequest ) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         userService.updateContactInfo(updateContactInfoRequest);
         return "redirect:/profile";
     }
 
     @PostMapping("/profile-change-password")
-    public String upadtePasssword(Model model,Authentication authentication,  @ModelAttribute("changePasswordRequest") ChangePasswordRequest changePasswordRequest, BindingResult bindingResult) throws NoSuchAlgorithmException {
+    public String upadtePasssword(Model model,Authentication authentication,  @ModelAttribute("changePasswordRequest") ChangePasswordRequest changePasswordRequest, BindingResult bindingResult) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         if (userService.passwordNotMatches(changePasswordRequest))
@@ -201,14 +206,14 @@ public class UserController {
     }
 
     @GetMapping("/profile-document")
-    public String profileDocument(Model model,Authentication authentication) {
+    public String profileDocument(Model model,Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         UserResponse userResponse = userService.getUserByUsername(userDetails.getUsername());
         model.addAttribute("user", userResponse);
         return "profile-document";
     }
     @GetMapping("/profile-timeoff")
-    public String profileTimeoff(Model model,Authentication authentication) {
+    public String profileTimeoff(Model model,Authentication authentication) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         UserResponse userResponse = userService.getUserByUsername(userDetails.getUsername());
         model.addAttribute("user", userResponse);

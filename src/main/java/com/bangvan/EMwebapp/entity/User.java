@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.type.descriptor.jdbc.TinyIntJdbcType;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +37,7 @@ public class User {
     private String linkedIn;
     @Column(columnDefinition = "TINYINT")
     private boolean enabled;
+
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(
